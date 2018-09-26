@@ -5,20 +5,23 @@
 #include <functional>
 #include <iostream>
 #include <vector>
+#include <memory>
+#include <utility>
 
 int main() {
   using rl::Coord;
   using rl::Grid;
   using rl::Size;
-  Grid<char> map = Grid<char>(Size(80, 20), '.');
-  // map.forEach([&](const Coord &c) { map.set(c, '.'); });
-  map.fill('.');
-  map.set(Coord(3, 4), '#');
-  map.forEachLine([&](const std::vector<char>& line) {
-    for (char c : line) {
-      std::cout << c;
+  std::unique_ptr<Grid<char>> map = std::make_unique<Grid<char>>(Size(80, 20), '*');
+  map->fill('.');
+  Coord c = Coord(12, 4);
+  (*map)[Coord(3, 4)] = '#';
+  (*map)[std::move(c)] = '*';
+  for (auto&& c : *map) {
+    if (c.y() != 0 && c.x() == 0) {
+      std::cout << std::endl;
     }
-    std::cout << std::endl;
-  });
+    std::cout << (*map)[c];
+  }
   return 0;
 }

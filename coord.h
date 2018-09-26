@@ -4,18 +4,16 @@ namespace rl {
 
 class Coord {
 public:
-  Coord(int x, int y) {
-    x_ = x;
-    y_ = y;
+  Coord(short x, short y) : x_(x), y_(y) {}
+  inline short x() const { return x_; };
+  inline short y() const { return y_; };
+  inline bool operator !=(const Coord& other) {
+    return x_ != other.x_ || y_ != other.y_;
   }
-  Coord(Coord &&) = default;
-
-  inline int x() const { return x_; };
-  inline int y() const { return y_; };
 
 private:
-  int x_;
-  int y_;
+  short x_;
+  short y_;
 };
 
 }

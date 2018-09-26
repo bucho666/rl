@@ -5,39 +5,40 @@
 #include "size.h"
 namespace rl {
 
+class GridIterator {
+public:
+  GridIterator(const Coord& c, short width) : coord_(c), width_(width) {};
+  inline Coord& operator *() { return coord_; }
+  inline void operator ++() {
+    coord_ = coord_.x() == width_ - 1 ? Coord(0, coord_.y() + 1) : Coord(coord_.x() + 1, coord_.y());
+  }
+  inline bool operator !=(const GridIterator& i) { return coord_ != i.coord_; }
+
+private:
+  Coord coord_;
+  short width_;
+};
+
 template <typename T>
 class Grid {
 public:
-  Grid(const Size &size, const T& initialValue) {
-    using std::vector;
-    using vectT = vector<T>;
-    map_ = vector<vectT>(size.height(), vectT(size.width(), initialValue));
+  Grid(const Size &size, const T& initialValue) :
+    map_(std::vector<std::vector<T>>(size.height(), std::vector<T>(size.width(), initialValue))) {}
+  inline T& operator[](Coord coord) { return map_[coord.y()][coord.x()]; }
+  inline const T& operator[](Coord coord) const { return map_[coord.y()][coord.x()]; }
+  inline short width() const { return map_[0].size(); }
+  inline short height() const { return map_.size(); }
+  inline Size size() const { return Size(width(), height()); }
+  inline GridIterator begin() const {
+    return GridIterator(Coord(0, 0), width());
   }
 
-  void set(const Coord &coord, const T& value) {
-    map_[coord.y()][coord.x()] = value;
+  inline GridIterator end() const {
+    return GridIterator(Coord(0, map_.size()), width());
   }
 
   inline void fill(const T& v) {
-    forEach([&](const Coord &c) { set(c, v); });
-  }
-
-  T& get(const Coord &coord) const {
-    return map_[coord.y()][coord.x()];
-  }
-
-  void forEach(std::function<void(const Coord &)> f) const {
-    for (size_t y = 0, height = map_.size(); y < height; y++) {
-      for (size_t x = 0, width = map_[y].size(); x < width; x++) {
-        f(Coord(x, y));
-      }
-    }
-  }
-
-  inline void forEachLine(std::function<void(const std::vector<T> &)> f) {
-    for (const auto &line : map_) {
-      f(line);
-    }
+    for (auto&& c : *this) (*this)[c] = v;
   }
 
 private:
