@@ -23,5 +23,6 @@ int main() {
     }
     std::cout << (*map)[c];
   }
+  std::cout << std::endl;
   return 0;
 }
