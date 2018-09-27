@@ -11,4 +11,10 @@ set(CMAKE_CXX_FLAGS "-O2 -Wall")
 # カレントディレクトリのソースファイル取得
 file(GLOB sorces *.cpp)
 # 実行ファイルと依存ファイル
-add_executable(${PROJECT_NAME} ${sorces})
+add_library(${PROJECT_NAME} STATIC ${sorces})
+# テストディレクトリ追加
+add_subdirectory(test)
+# テスト有効
+enable_testing()
+# テスト追加
+add_test(NAME RLTest COMMAND rltest)

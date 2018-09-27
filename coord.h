@@ -16,15 +16,19 @@ public:
     return y_;
   };
 
-  inline bool operator !=(const Coord& other) {
+  inline bool operator ==(const Coord& other) const {
+    return x_ == other.x_ && y_ == other.y_;
+  }
+
+  inline bool operator !=(const Coord& other) const {
     return x_ != other.x_ || y_ != other.y_;
   }
 
-  inline Coord operator +(const Coord& other) {
+  inline Coord operator +(const Coord& other) const {
     return Coord(x_ + other.x_, y_ + other.y_);
   }
 
-  inline Coord operator -(const Coord& other) {
+  inline Coord operator -(const Coord& other) const {
     return Coord(x_ - other.x_, y_ - other.y_);
   }
 
