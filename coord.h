@@ -32,6 +32,18 @@ public:
     return Coord(x_ - other.x_, y_ - other.y_);
   }
 
+  inline Coord& operator +=(const Coord& other) {
+    x_ += other.x_;
+    y_ += other.y_;
+    return (*this);
+  }
+
+  inline Coord& operator -=(const Coord& other) {
+    x_ -= other.x_;
+    y_ -= other.y_;
+    return (*this);
+  }
+
 private:
   short x_;
   short y_;
@@ -50,7 +62,7 @@ public:
     coord_ = coord_.x() == width_ - 1 ? Coord(left_, coord_.y() + 1) : coord_ + right;
   }
 
-  inline bool operator !=(const CoordIterator& i) {
+  inline bool operator !=(const CoordIterator& i) const {
     return coord_ != i.coord_;
   }
 

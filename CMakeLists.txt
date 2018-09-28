@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "-O2 -Wall")
 # カレントディレクトリのソースファイル取得
 file(GLOB sorces *.cpp)
-# 実行ファイルと依存ファイル
+# ライブラリファイルと依存ファイル
 add_library(${PROJECT_NAME} STATIC ${sorces})
 # テストディレクトリ追加
 add_subdirectory(test)
