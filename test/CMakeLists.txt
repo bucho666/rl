@@ -13,4 +13,4 @@ add_executable(${PROJECT_NAME} ${sorces})
 # サブディレクトリ追加
 add_subdirectory(${gtest})
 # リンクライブラリ設定
-target_link_libraries(${PROJECT_NAME} gtest gtest_main pthread)
+target_link_libraries(${PROJECT_NAME} rl gtest gtest_main pthread)

@@ -10,7 +10,9 @@ class CoordIterator;
 class Size {
 public:
   Size(short width, short height) : width_(width), height_(height){}
-  Size(Size &&) = default;
+  inline bool operator==(const Size& other) const {
+    return width_ == other.width_ && height_ == other.height_;
+  }
 
   inline short width() const {
     return width_;
