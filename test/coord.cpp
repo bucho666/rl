@@ -48,6 +48,12 @@ TEST_F(CoordIteratorTest, Incriment) {
   EXPECT_EQ(*itr, Coord(0, 3));
 }
 
+TEST_F(CoordIteratorTest, IncrimentHasLeft) {
+  CoordIterator itr = CoordIterator(Coord(2, 2), 3, 1);
+  ++itr;
+  EXPECT_EQ(*itr, Coord(1, 3));
+}
+
 TEST_F(CoordIteratorTest, NotEqual) {
   CoordIterator itr = CoordIterator(Coord(1, 2), 3);
   EXPECT_FALSE(itr != CoordIterator(Coord(1, 2), 3));
