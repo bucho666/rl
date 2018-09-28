@@ -18,3 +18,5 @@ add_subdirectory(test)
 enable_testing()
 # テスト追加
 add_test(NAME RLTest COMMAND rltest)
+# デモディレクトリ追加
+add_subdirectory(demo)

@@ -33,4 +33,17 @@ TEST_F(SizeTest, For) {
   EXPECT_TRUE(std::equal(expect.cbegin(), expect.cend(), result.cbegin()));
 }
 
+TEST_F(SizeTest, BorderHas) {
+  Size s = Size(3, 3);
+  EXPECT_TRUE(s.borderHas(Coord(0, 0)));
+  EXPECT_TRUE(s.borderHas(Coord(1, 0)));
+  EXPECT_TRUE(s.borderHas(Coord(2, 0)));
+  EXPECT_TRUE(s.borderHas(Coord(0, 1)));
+  EXPECT_FALSE(s.borderHas(Coord(1, 1)));
+  EXPECT_TRUE(s.borderHas(Coord(2, 1)));
+  EXPECT_TRUE(s.borderHas(Coord(0, 2)));
+  EXPECT_TRUE(s.borderHas(Coord(1, 2)));
+  EXPECT_TRUE(s.borderHas(Coord(2, 2)));
+}
+
 }

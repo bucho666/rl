@@ -13,6 +13,11 @@ TEST_F(CoordTest, Equal) {
   EXPECT_NE(Coord(1, 2), Coord(0, 2));
 }
 
+TEST_F(CoordTest, Greater) {
+  EXPECT_TRUE(Coord(1 ,2) < Coord(2, 2));
+  EXPECT_TRUE(Coord(2 ,2) < Coord(1, 3));
+}
+
 TEST_F(CoordTest, Getter) {
   Coord c = Coord(1, 2);
   EXPECT_EQ(c.x(), 1);

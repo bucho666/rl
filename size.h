@@ -24,6 +24,7 @@ public:
 
   CoordIterator begin() const;
   CoordIterator end() const;
+  bool borderHas(const Coord& coord) const;
 
 private:
   short width_;

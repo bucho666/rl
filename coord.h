@@ -16,29 +16,33 @@ public:
     return y_;
   };
 
-  inline bool operator ==(const Coord& other) const {
+  inline bool operator==(const Coord& other) const {
     return x_ == other.x_ && y_ == other.y_;
   }
 
-  inline bool operator !=(const Coord& other) const {
+  inline bool operator!=(const Coord& other) const {
     return x_ != other.x_ || y_ != other.y_;
   }
 
-  inline Coord operator +(const Coord& other) const {
+  inline bool operator<(const Coord &other) const {
+    return y_ < other.y_ ? true : x_ < other.x_;
+  }
+
+  inline Coord operator+(const Coord& other) const {
     return Coord(x_ + other.x_, y_ + other.y_);
   }
 
-  inline Coord operator -(const Coord& other) const {
+  inline Coord operator-(const Coord& other) const {
     return Coord(x_ - other.x_, y_ - other.y_);
   }
 
-  inline Coord& operator +=(const Coord& other) {
+  inline Coord& operator+=(const Coord& other) {
     x_ += other.x_;
     y_ += other.y_;
     return (*this);
   }
 
-  inline Coord& operator -=(const Coord& other) {
+  inline Coord& operator-=(const Coord& other) {
     x_ -= other.x_;
     y_ -= other.y_;
     return (*this);
@@ -53,16 +57,16 @@ class CoordIterator {
 public:
   CoordIterator(const Coord& c, short width, short left=0) : coord_(c), width_(width), left_(left) {};
 
-  inline Coord& operator *() {
+  inline Coord& operator*() {
     return coord_;
   }
 
-  inline void operator ++() {
+  inline void operator++() {
     static const Coord right = Coord(1, 0);
     coord_ = coord_.x() == width_ - 1 ? Coord(left_, coord_.y() + 1) : coord_ + right;
   }
 
-  inline bool operator !=(const CoordIterator& i) const {
+  inline bool operator!=(const CoordIterator& i) const {
     return coord_ != i.coord_;
   }
 
@@ -89,6 +93,17 @@ public:
               RIGHT = E;
   const std::vector<Coord> CROSS = {N, E, W, S};
   const std::vector<Coord> AROUND = {N, NE, E, SE, S, SW, W, NW};
+};
+
+}
+
+namespace std {
+template<>
+class hash<rl::Coord> {
+public:
+  size_t operator ()( const rl::Coord& coord ) const {
+    return coord.x() | coord.y() << 16;
+  }
 };
 
 }
