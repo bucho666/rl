@@ -78,21 +78,12 @@ private:
 
 class Direction {
 public:
-  const Coord HERE = Coord(0, 0),
-              N  = Coord( 0, -1),
-              E  = Coord( 1,  0),
-              W  = Coord(-1,  0),
-              S  = Coord( 0,  1),
-              NE = Coord( 1, -1),
-              SE = Coord( 1,  1),
-              SW = Coord(-1,  1),
-              NW = Coord(-1, -1),
-              UP = N,
-              DOWN = S,
-              LEFT = W,
-              RIGHT = E;
-  const std::vector<Coord> CROSS = {N, E, W, S};
-  const std::vector<Coord> AROUND = {N, NE, E, SE, S, SW, W, NW};
+  static const Coord HERE,
+              N, E, W, S,
+              NE, SE, SW, NW,
+              UP, DOWN, LEFT, RIGHT;
+  static const std::vector<Coord> CROSS;
+  static const std::vector<Coord> AROUND;
 };
 
 }
