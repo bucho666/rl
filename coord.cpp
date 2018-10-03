@@ -1,5 +1,3 @@
-#pragma once
-
 #include "coord.h"
 #include <vector>
 
@@ -25,5 +23,29 @@ const std::vector<Coord> Direction::AROUND = {
   Direction::N, Direction::NE, Direction::E, Direction::SE,
   Direction::S, Direction::SW, Direction::W, Direction::NW
 };
+
+std::array<Coord, 4>
+Coord::cross() const {
+  return(std::array<Coord, 4>) {
+    (*this) + Direction::N,
+    (*this) + Direction::E,
+    (*this) + Direction::S,
+    (*this) + Direction::W,
+  };
+}
+
+std::array<Coord, 8>
+Coord::around() const {
+  return(std::array<Coord, 8>) {
+    (*this) + Direction::N,
+    (*this) + Direction::NE,
+    (*this) + Direction::E,
+    (*this) + Direction::SE,
+    (*this) + Direction::S,
+    (*this) + Direction::SW,
+    (*this) + Direction::W,
+    (*this) + Direction::NW,
+  };
+}
 
 }

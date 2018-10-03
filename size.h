@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SIZE_H
+#define SIZE_H
 
 #include <functional>
 
@@ -33,3 +34,5 @@ private:
 };
 
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GRID_H
+#define GRID_H
+
 #include <functional>
 #include <vector>
 #include "coord.h"
@@ -48,3 +50,5 @@ private:
 };
 
 }
+
+#endif

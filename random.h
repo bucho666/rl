@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RANDOM_H
+#define RANDOM_H
 
 namespace rl {
 
@@ -8,3 +9,5 @@ public:
 };
 
 } // namespace rl
+
+#endif

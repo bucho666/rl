@@ -1,6 +1,8 @@
-#pragma once
+#ifndef COORD_H
+#define COORD_H
 
 #include <vector>
+#include <array>
 
 namespace rl {
 
@@ -48,6 +50,9 @@ public:
     return (*this);
   }
 
+  std::array<Coord, 4> cross() const;
+  std::array<Coord, 8> around() const;
+
 private:
   short x_;
   short y_;
@@ -86,7 +91,7 @@ public:
   static const std::vector<Coord> AROUND;
 };
 
-}
+} // namespace rl
 
 namespace std {
 template<>
@@ -98,3 +103,5 @@ public:
 };
 
 }
+
+#endif

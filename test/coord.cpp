@@ -1,5 +1,7 @@
 #include "../coord.h"
 #include <gtest/gtest.h>
+#include <vector>
+#include <algorithm>
 
 namespace rl {
 
@@ -39,6 +41,29 @@ TEST_F(CoordTest, PlusMinusEqual) {
   a -= Coord(1, 2);
   EXPECT_EQ(a, Coord(3, 4));
 }
+
+TEST_F(CoordTest, Around) {
+  Coord center = Coord(2, 2);
+  std::vector<Coord> result, expect = {
+    Coord(2, 1), Coord(3, 1), Coord(3, 2),
+    Coord(3, 3), Coord(2, 3), Coord(1, 3),
+    Coord(1, 2), Coord(1, 1),
+  };
+  for (auto&& c : center.around()) result.push_back(c);
+  EXPECT_EQ(result.size(), expect.size());
+  EXPECT_TRUE(std::equal(result.cbegin(), result.cend(), expect.cbegin()));
+}
+
+TEST_F(CoordTest, Cross) {
+  Coord center = Coord(2, 2);
+  std::vector<Coord> result, expect = {
+    Coord(2, 1), Coord(3, 2), Coord(2, 3), Coord(1, 2),
+  };
+  for (auto&& c : center.cross()) result.push_back(c);
+  EXPECT_EQ(result.size(), expect.size());
+  EXPECT_TRUE(std::equal(result.cbegin(), result.cend(), expect.cbegin()));
+}
+
 
 TEST_F(CoordIteratorTest, Asterisk) {
   CoordIterator itr = CoordIterator(Coord(1, 2), 3);

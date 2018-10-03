@@ -6,6 +6,7 @@
 #include "random.h"
 #include "size.h"
 #include "cellular.h"
+#include "space.h"
 
 #endif
 
