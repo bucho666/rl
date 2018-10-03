@@ -5,6 +5,7 @@
 #include <vector>
 #include "coord.h"
 #include "size.h"
+
 namespace rl {
 
 template <typename T>

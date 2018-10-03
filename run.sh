@@ -2,5 +2,6 @@
 mkdir -p build
 cd build
 cmake ..
-make && demo/cellular
+make && demo/random
+#make && demo/cellular
 #make && test/rltest
